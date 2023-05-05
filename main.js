@@ -109,7 +109,7 @@ function get_default(i) {
     let str = i.toUpperCase();
 	if (!str.includes("DEFAULT NULL") && str.includes("DEFAULT")) {
 		let arr = i.split(" ");
-		let default_value = arr[arr.findIndex((i) => i == "DEFAULT") + 1];
+		let default_value = arr[arr.findIndex((i) => i.toUpperCase() == "DEFAULT") + 1];
 		return `->default(${default_value})`;
 	}
 	return "";

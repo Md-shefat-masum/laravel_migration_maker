@@ -31,7 +31,7 @@ resets.onclick = function () {
 	src.focus();
 };
 
-src.onkeyup = convert;
+src.onkeyup = _.debounce(convert,1000);
 
 function convert() {
 	if (src.value.length) {
@@ -48,7 +48,7 @@ function convert() {
 			return str;
 		});
 
-		output.innerHTML = query.join("\n");
+		output.value = query.join("\n");
 		console.log(query);
 		copy_run();
 	}

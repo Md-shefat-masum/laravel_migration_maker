@@ -31,7 +31,7 @@ resets.onclick = function () {
 	src.focus();
 };
 
-src.onkeyup = _.debounce(convert,1000);
+src.onkeyup = _.debounce(convert,1500);
 
 function convert() {
 	if (src.value.length) {

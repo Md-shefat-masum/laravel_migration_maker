@@ -14,9 +14,9 @@ const Toast = Swal.mixin({
 	},
 });
 
-copy.onclick = copy;
+copy.onclick = copy_run;
 
-function copy() {
+function copy_run() {
 	output.select();
 	document.execCommand("copy");
 
@@ -50,7 +50,7 @@ function convert() {
 
 		output.innerHTML = query.join("\n");
 		console.log(query);
-		copy();
+		copy_run();
 	}
 }
 

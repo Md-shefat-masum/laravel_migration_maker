@@ -36,8 +36,11 @@ src.onkeyup = _.debounce(convert,1000);
 function convert() {
 	if (src.value.length) {
 		src.value = src.value.replace(/^\s+|\s+$/gm, "");
-		let entry = src.value.split(",\n").map((i) => i.replace(/(\r\n|\n|\r)/gm, ""));
-		entry[entry.length - 1] == "" ? entry.splice(entry.length - 1) : entry;
+		let entry = src.value;
+		if(entry[entry.length-1] == ','){
+			entry = entry.substring(0, entry.length-1);
+		}
+		entry = entry.split(",\n").map((i) => i.replace(/(\r\n|\n|\r)/gm, ""));
 
 		let query = entry.map((i) => {
 			let str = get_data_type(i);
@@ -60,6 +63,7 @@ function get_data_type(i) {
 	let data_type = i.split(" ")[1].toLowerCase();
 	let var_char_len = 0;
 	if (data_type) {
+		console.log(data_type);
 		if (data_type.includes("varchar")) {
 			var_char_len = var_char(data_type);
 			data_type = "varchar";

@@ -24,7 +24,9 @@ copy.onclick = function () {
 	});
 };
 
-resets.onclick = () => (src.innerHTML = "");
+resets.onclick = function () {
+	src.innerHTML = "";
+};
 
 src.onkeyup = convert;
 

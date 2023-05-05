@@ -61,6 +61,9 @@ function get_data_type(i) {
 				break;
 			case "bigint":
 				perfix += `bigInteger(${col_name})`;
+				if (col_name.includes("id")) {
+					perfix += `->unsigned()`;
+				}
 				break;
 			case "tinyint":
 				perfix += `tinyInteger(${col_name})`;

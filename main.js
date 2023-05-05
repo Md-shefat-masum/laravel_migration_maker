@@ -47,7 +47,7 @@ function convert() {
 
 function get_data_type(i) {
 	let perfix = `$table->`;
-	let col_name = i.split(" ")[0].replaceAll("`", "'");
+	let col_name = i.split(" ")[0].replaceAll("`", '"');
 	let data_type = i.split(" ")[1].toLowerCase();
 	let var_char_len = 0;
 	if (data_type) {
@@ -101,16 +101,16 @@ function get_data_type(i) {
 }
 
 function get_null(i) {
-    i = i.toUpperCase();
+	i = i.toUpperCase();
 	return !i.includes("NOT NULL") && (i.includes("NULL") || i.includes("DEFAULT NULL") || !i.includes("DEFAULT")) ? "->nullable()" : "";
 }
 
 function get_default(i) {
-    let str = i.toUpperCase();
+	let str = i.toUpperCase();
 	if (!str.includes("DEFAULT NULL") && str.includes("DEFAULT")) {
 		let arr = i.split(" ");
 		let default_value = arr[arr.findIndex((i) => i.toUpperCase() == "DEFAULT") + 1];
-		return `->default(${default_value})`;
+		return `->default(${default_value.replaceAll("'", '"')})`;
 	}
 	return "";
 }

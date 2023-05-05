@@ -31,20 +31,22 @@ resets.onclick = function () {
 src.onkeyup = convert;
 
 function convert() {
-	src.value = src.value.replace(/^\s+|\s+$/gm, "");
-	let entry = src.value.split(",").map((i) => i.replace(/(\r\n|\n|\r)/gm, ""));
-	entry[entry.length - 1] == "" ? entry.splice(entry.length - 1) : entry;
-
-	let query = entry.map((i) => {
-		let str = get_data_type(i);
-		str += get_null(i);
-		str += get_default(i);
-		str += ";";
-		return str;
-	});
-
-	output.innerHTML = query.join("\n");
-	console.log(query);
+	if(src.value.length){
+		src.value = src.value.replace(/^\s+|\s+$/gm, "");
+		let entry = src.value.split(",").map((i) => i.replace(/(\r\n|\n|\r)/gm, ""));
+		entry[entry.length - 1] == "" ? entry.splice(entry.length - 1) : entry;
+	
+		let query = entry.map((i) => {
+			let str = get_data_type(i);
+			str += get_null(i);
+			str += get_default(i);
+			str += ";";
+			return str;
+		});
+	
+		output.innerHTML = query.join("\n");
+		console.log(query);
+	}
 }
 
 function get_data_type(i) {

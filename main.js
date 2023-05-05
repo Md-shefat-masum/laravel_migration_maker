@@ -59,6 +59,9 @@ function get_data_type(i) {
 			var_char_len = var_char(data_type);
 			data_type = "varchar";
 		}
+		if (data_type.includes("double")) {
+			data_type = "double";
+		}
 		switch (data_type) {
 			case "int":
 				perfix += `integer(${col_name})`;

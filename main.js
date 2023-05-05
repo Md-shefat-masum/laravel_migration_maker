@@ -1,7 +1,7 @@
 let src = document.getElementById("src");
 let output = document.getElementById("output");
 let copy = document.getElementById("copy");
-let reset = document.getElementById("reset");
+let resets = document.getElementById("resets");
 const Toast = Swal.mixin({
 	toast: true,
 	position: "top-end",
@@ -24,7 +24,7 @@ copy.onclick = function () {
 	});
 };
 
-reset.onclick = () => (src.innerHTML = "");
+resets.onclick = () => (src.innerHTML = "");
 
 src.onkeyup = convert;
 

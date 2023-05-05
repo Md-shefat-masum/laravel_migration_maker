@@ -33,13 +33,14 @@ src.onkeyup = convert;
 function convert() {
 	if(src.value.length){
 		src.value = src.value.replace(/^\s+|\s+$/gm, "");
-		let entry = src.value.split(",").map((i) => i.replace(/(\r\n|\n|\r)/gm, ""));
+		let entry = src.value.split(",\n").map((i) => i.replace(/(\r\n|\n|\r)/gm, ""));
 		entry[entry.length - 1] == "" ? entry.splice(entry.length - 1) : entry;
 	
 		let query = entry.map((i) => {
 			let str = get_data_type(i);
 			str += get_null(i);
 			str += get_default(i);
+			str += get_comment(i);
 			str += ";";
 			return str;
 		});
@@ -121,6 +122,16 @@ function get_default(i) {
 		let arr = i.split(" ");
 		let default_value = arr[arr.findIndex((i) => i.toUpperCase() == "DEFAULT") + 1];
 		return `->default(${default_value.replaceAll("'", '"')})`;
+	}
+	return "";
+}
+
+function get_comment(i) {
+	let str = i.toUpperCase();
+	if (str.includes("COMMENT")) {
+		let arr = i.split("COMMENT");
+		let default_value = arr[1];
+		return `->comment(${default_value.replaceAll("'", '"')})`;
 	}
 	return "";
 }

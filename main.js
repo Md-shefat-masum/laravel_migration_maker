@@ -25,7 +25,7 @@ copy.onclick = function () {
 };
 
 resets.onclick = function () {
-	src.innerHTML = "";
+	src.value = "";
 };
 
 src.onkeyup = convert;

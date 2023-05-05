@@ -14,7 +14,9 @@ const Toast = Swal.mixin({
 	},
 });
 
-copy.onclick = function () {
+copy.onclick = copy;
+
+function copy() {
 	output.select();
 	document.execCommand("copy");
 
@@ -22,20 +24,21 @@ copy.onclick = function () {
 		icon: "success",
 		title: "Schema copied",
 	});
-};
+}
 
 resets.onclick = function () {
 	src.value = "";
+	src.focus();
 };
 
 src.onkeyup = convert;
 
 function convert() {
-	if(src.value.length){
+	if (src.value.length) {
 		src.value = src.value.replace(/^\s+|\s+$/gm, "");
 		let entry = src.value.split(",\n").map((i) => i.replace(/(\r\n|\n|\r)/gm, ""));
 		entry[entry.length - 1] == "" ? entry.splice(entry.length - 1) : entry;
-	
+
 		let query = entry.map((i) => {
 			let str = get_data_type(i);
 			str += get_null(i);
@@ -44,9 +47,10 @@ function convert() {
 			str += ";";
 			return str;
 		});
-	
+
 		output.innerHTML = query.join("\n");
 		console.log(query);
+		copy();
 	}
 }
 
